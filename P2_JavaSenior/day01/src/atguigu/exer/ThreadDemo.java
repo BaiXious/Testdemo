@@ -16,57 +16,84 @@ public class ThreadDemo {
 //        m2.start();
 
         //创建Thread类的匿名子类的方式
-        new Thread(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 100; i++) {
-                    if(i % 2 == 0){
-                        System.out.println(Thread.currentThread().getName() + ":" + i);
+//         new Thread(){
+//             @Override
+//             public void run() {
+//                 for (int i = 0; i < 100; i++) {
+//                     if(i % 2 == 0){
+//                         System.out.println(Thread.currentThread().getName() + ":" + i);
 
-                    }
-                }
-            }
-        }.start();
+//                     }
+//                 }
+//             }
+//         }.start();
 
 
-        new Thread(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 100; i++) {
-                    if(i % 2 != 0){
-                        System.out.println(Thread.currentThread().getName() + ":" + i);
+//         new Thread(){
+//             @Override
+//             public void run() {
+//                 for (int i = 0; i < 100; i++) {
+//                     if(i % 2 != 0){
+//                         System.out.println(Thread.currentThread().getName() + ":" + i);
 
-                    }
-                }
-            }
-        }.start();
+//                     }
+//                 }
+//             }
+//         }.start();
+        
+        MyThreadOddEven myThreadOddEven = new MyThreadOddEven();
+
+        new Thread(myThreadOddEven::even).start();
+
+        new Thread(myThreadOddEven::odd).start();
+
 
     }
 }
 
-class MyThread1 extends Thread{
-    @Override
-    public void run() {
-        for (int i = 0; i < 100; i++) {
-            if(i % 2 == 0){
-                System.out.println(Thread.currentThread().getName() + ":" + i);
+class MyThreadOddEven {
 
+    public void even() {
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.println(Thread.currentThread().getName() + "even>>" + i);
             }
         }
-
     }
-}
 
-
-class MyThread2 extends Thread{
-    @Override
-    public void run() {
-        for (int i = 0; i < 100; i++) {
-            if(i % 2 != 0){
-                System.out.println(Thread.currentThread().getName() + ":" + i);
-
+    public void odd() {
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 != 0) {
+                System.out.println(Thread.currentThread().getName() + "odd>>" + i);
             }
         }
-
     }
+
 }
+
+// class MyThread1 extends Thread{
+//     @Override
+//     public void run() {
+//         for (int i = 0; i < 100; i++) {
+//             if(i % 2 == 0){
+//                 System.out.println(Thread.currentThread().getName() + ":" + i);
+
+//             }
+//         }
+
+//     }
+// }
+
+
+// class MyThread2 extends Thread{
+//     @Override
+//     public void run() {
+//         for (int i = 0; i < 100; i++) {
+//             if(i % 2 != 0){
+//                 System.out.println(Thread.currentThread().getName() + ":" + i);
+
+//             }
+//         }
+
+//     }
+// }
